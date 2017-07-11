@@ -22,6 +22,7 @@ RUN apt-get update && apt-get -y install apt-utils \
     php-intl \
     php-mbstring \
     php-mcrypt \
+    php-mysql \
     php-soap \
     php-xml \
     php-xmlrpc \
