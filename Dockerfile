@@ -11,6 +11,9 @@ RUN sed -i "s/^exit 101$/exit 0/" /usr/sbin/policy-rc.d
 RUN echo "Acquire::http::No-Cache true;" >> /etc/apt/apt.conf.d/99mysettings
 RUN echo "Acquire::http::Pipeline-Depth 0;" >> /etc/apt/apt.conf.d/99mysettings
 
+ADD ./foreground.sh /etc/apache2/foreground.sh
+RUN chmod +x /etc/apache2/foreground.sh
+
 RUN apt-get update && apt-get -y install apt-utils \
     apache2 \
     git \
@@ -33,9 +36,12 @@ RUN apt-get update && apt-get -y install apt-utils \
 ADD moodle /tmp/moodle
 
 RUN mv /tmp/moodle/* /var/www/html
+RUN rm /var/www/html/index.html
 RUN echo "ServerName 100.38.56.98" >> /etc/apache2/apache2.conf
 RUN mkdir /var/moodledata
 RUN chown -R www-data /var/moodledata
 RUN chmod -R 777 /var/moodledata
 
 EXPOSE 80
+
+CMD ["/etc/apache2/foreground.sh"]
