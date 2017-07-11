@@ -1,6 +1,8 @@
 FROM ubuntu:16.04
 MAINTAINER elana laskin
 
+COPY moodle-config.php /var/www/html/config.php
+
 # apt-get only allows packages which work in interactive mode. Set all packages to work in noninteractive mode.
 ENV DEBIAN_FRONTEND noninteractive
 
