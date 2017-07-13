@@ -3,7 +3,7 @@ MAINTAINER elana laskin
 
 COPY moodle-config.php /var/www/html/config.php
 
-# apt-get only allows packages which work in interactive mode. Set all packages to work in noninteractive mode.
+# apt-get doesn't allow packages which work in interactive mode. Set all packages to work in noninteractive mode.
 ENV DEBIAN_FRONTEND noninteractive
 
 # Avoid ERROR: invoke-rc.d: policy-rc.d denied execution of start.
@@ -13,10 +13,12 @@ RUN sed -i "s/^exit 101$/exit 0/" /usr/sbin/policy-rc.d
 RUN echo "Acquire::http::No-Cache true;" >> /etc/apt/apt.conf.d/99mysettings
 RUN echo "Acquire::http::Pipeline-Depth 0;" >> /etc/apt/apt.conf.d/99mysettings
 
+# add this file which contains additional script commands and make executable
 ADD ./foreground.sh /etc/apache2/foreground.sh
 RUN chmod +x /etc/apache2/foreground.sh
 
-RUN apt-get update && apt-get -y install apt-utils \
+RUN apt-get update && apt-get -y install \
+    apt-utils \
     apache2 \
     dnsutils \
     git \
@@ -36,14 +38,14 @@ RUN apt-get update && apt-get -y install apt-utils \
     php7.0-gd \
     vim
 
-ADD moodle /tmp/moodle
+
+RUN cd /tmp && \
+    git clone -b MOODLE_33_STABLE git://git.moodle.org/moodle.git --depth=1
+
 
 RUN mv /tmp/moodle/* /var/www/html
 RUN rm /var/www/html/index.html
 
-# RUN export publicIp="$(dig +short myip.opendns.com @resolver1.opendns.com)"
-# RUN perl -i.bak -pe "s/(^.*wwwroot\s*=\s*).*/\$1'http:\/\/$publicIp';/" /var/www/html/config.php
-# RUN echo "ServerName $publicIp" >> /etc/apache2/apache2.conf
 RUN mkdir /var/moodledata
 RUN chown -R www-data /var/moodledata
 RUN chmod -R 777 /var/moodledata
