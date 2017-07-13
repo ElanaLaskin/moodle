@@ -18,6 +18,7 @@ RUN chmod +x /etc/apache2/foreground.sh
 
 RUN apt-get update && apt-get -y install apt-utils \
     apache2 \
+    dnsutils \
     git \
     libapache2-mod-php \
     libssl-dev \
@@ -39,7 +40,10 @@ ADD moodle /tmp/moodle
 
 RUN mv /tmp/moodle/* /var/www/html
 RUN rm /var/www/html/index.html
-RUN echo "ServerName 100.38.56.98" >> /etc/apache2/apache2.conf
+
+# RUN export publicIp="$(dig +short myip.opendns.com @resolver1.opendns.com)"
+# RUN perl -i.bak -pe "s/(^.*wwwroot\s*=\s*).*/\$1'http:\/\/$publicIp';/" /var/www/html/config.php
+# RUN echo "ServerName $publicIp" >> /etc/apache2/apache2.conf
 RUN mkdir /var/moodledata
 RUN chown -R www-data /var/moodledata
 RUN chmod -R 777 /var/moodledata
