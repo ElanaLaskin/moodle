@@ -29,13 +29,13 @@ https://docs.docker.com/compose/install/
 
 3. Clone this repo
 
-For installation on your PC:
+    For installation on your PC:
+ 
+    `git clone https://ELaskin@bitbucket.org/eeg1/complete-moodle-setup-with-docker-compose-pc.git`
 
-`git clone https://ELaskin@bitbucket.org/eeg1/complete-moodle-setup-with-docker-compose-pc.git`
+    For installation on Cloud Service:
 
-For installation on Cloud Service:
-
-`git clone https://ELaskin@bitbucket.org/eeg1/complete-moodle-setup-with-docker-compose-pc.git --branch config-for-cloud-service --single-branch`
+    `git clone https://ELaskin@bitbucket.org/eeg1/complete-moodle-setup-with-docker-compose-pc.git --branch config-for-cloud-service --single-branch`
 
 4. Change directories to the project
 `cd complete-moodle-setup-with-docker-compose-pc/`
@@ -44,14 +44,14 @@ For installation on Cloud Service:
 
 6. Visit [localhost](http://localhost)
 
-* I have gotten an error related to port binding upon running this last command (Error Bind for 0.0.0.0:3306 failed: port is already allocated). This is because the docker-compose.yml file is binding port 3306 of the container to 3306 on your host machine. There are two ways to resolve this:
+    Note: I have gotten an error related to port binding upon running this last command (Error Bind for 0.0.0.0:3306 failed: port is already allocated). This is because the docker-compose.yml file is binding port 3306 of the container to 3306 on your host machine. There are two ways to resolve this:
 
-1. Kill the process on 3306
+    1. Kill the process on 3306
 
-* Find port `sudo lsof -i :3306`
+        * Find port `sudo lsof -i :3306`
 
-* Kill process (at your own risk!) `sudo kill -9 PID` replace PID with process ID.
+        * Kill process (at your own risk!) `sudo kill -9 PID` replace PID with process ID.
 
-2. Change the port in docker-compose.yml
+    2. Change the port in docker-compose.yml
 ports:
       - "3306:3306" ----> "3300:3306"
