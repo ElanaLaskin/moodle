@@ -3,7 +3,7 @@
 
 ### What is this repository for? ###
 
-This repository is for setting up Moodle via Docker Compose. Docker Compose is a tool for running multi-container Docker applications. 
+This repository is for setting up Moodle via Docker Compose. This configuration is intended for spinning up an instance of the web app for testing purposes.
 
 ### An Overview of the Moodle Structure ###
 
@@ -17,6 +17,10 @@ A Moodle application consists of three parts:
 
 ### How do I get set up? ###
 
+You can spin up this project on your local pc or on a cloud provider. The configuration for a pc and cloud service varies slightly. The master branch of this repository will work for setting up the project on your **pc**.
+
+If you're testing on the cloud, please clone the [config-for-cloud-service](https://bitbucket.org/eeg1/complete-moodle-setup-with-docker-compose-pc/src/a0548ccc6cd61fea2a81f71810e91df254b3aa35/docker-compose.yml?at=config-for-cloud-service) branch. The instructions below will work for installation on pc and cloud service. If serving on the cloud, be sure you are logged in to the server before you start.
+
 1. Install Docker
 https://docs.docker.com/engine/installation/
 
@@ -24,7 +28,14 @@ https://docs.docker.com/engine/installation/
 https://docs.docker.com/compose/install/
 
 3. Clone this repo
-git clone https://ELaskin@bitbucket.org/eeg1/complete-moodle-setup-with-docker-compose-pc.git
+
+For installation on your PC:
+
+`git clone https://ELaskin@bitbucket.org/eeg1/complete-moodle-setup-with-docker-compose-pc.git`
+
+For installation on Cloud Service:
+
+`git clone https://ELaskin@bitbucket.org/eeg1/complete-moodle-setup-with-docker-compose-pc.git --branch config-for-cloud-service --single-branch`
 
 4. Change directories to the project
 `cd complete-moodle-setup-with-docker-compose-pc/`
