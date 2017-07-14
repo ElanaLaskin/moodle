@@ -8,8 +8,11 @@ This repository is for setting up Moodle via Docker Compose. Docker Compose is a
 ### An Overview of the Moodle Structure ###
 
 A Moodle application consists of three parts:
+
 1. Moodle Core -- what you see at https://github.com/moodle/moodle
+
 2. A Moodle Database -- this is a database (Mysql, in this case) which the Moodle application populates automatically. It contains site themes and settings.
+
 3. Moodledata -- This is a Moodle term and means uploaded site content (i.e, course material).
 
 ### How do I get set up? ###
@@ -33,7 +36,9 @@ git clone https://ELaskin@bitbucket.org/eeg1/complete-moodle-setup-with-docker-c
 * I have gotten an error related to port binding upon running this last command (Error Bind for 0.0.0.0:3306 failed: port is already allocated). This is because the docker-compose.yml file is binding port 3306 of the container to 3306 on your host machine. There are two ways to resolve this:
 
 1. Kill the process on 3306
+
 * Find port `sudo lsof -i :3306`
+
 * Kill process (at your own risk!) `sudo kill -9 PID` replace PID with process ID.
 
 2. Change the port in docker-compose.yml
