@@ -24,6 +24,7 @@ Docker Compose is a tool for linking multiple Docker containers (instances of Do
 ### Contents of this Repo ###
 
 * .data directory contains the file-contents of the **moodle database**
+* .env file containing variables for database settings
 * Dockerfile
 * docker-compose.yml
 * foreground.sh -- a shell script called by the Dockerfile
